@@ -3,15 +3,15 @@
  * @param {Function} func - The function to run
  * @param {Number} frequencyInMs - The number of milliseconds between calls
  */
-module.exports = (func, frequencyInMs) => {
-  let running = false
+module.exports = function periodically(func, frequencyInMs) {
+  var running = false
 
   /**
    * @description - Runs the function and schedules another run upon
    *   completion
    */
   function tick() {
-    return Promise.resolve(func()).then(() => {
+    return Promise.resolve(func()).then(function() {
       if (running) {
         setTimeout(tick, frequencyInMs)
       }
@@ -40,5 +40,5 @@ module.exports = (func, frequencyInMs) => {
     running = false
   }
 
-  return { start, stop }
+  return { start: start, stop: stop }
 }
