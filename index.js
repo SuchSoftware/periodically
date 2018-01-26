@@ -3,8 +3,8 @@
  * @param {Function} func - The function to run
  * @param {Number} frequencyInMs - The number of milliseconds between calls
  */
-export default (func, frequencyInMs) => {
-  let running = false;
+module.exports = (func, frequencyInMs) => {
+  let running = false
 
   /**
    * @description - Runs the function and schedules another run upon
@@ -13,11 +13,11 @@ export default (func, frequencyInMs) => {
   function tick() {
     return Promise.resolve(func()).then(() => {
       if (running) {
-        setTimeout(tick, frequencyInMs);
+        setTimeout(tick, frequencyInMs)
       }
 
-      return null;
-    });
+      return null
+    })
   }
 
   /**
@@ -25,20 +25,20 @@ export default (func, frequencyInMs) => {
    */
   function start() {
     if (!running) {
-      running = true;
+      running = true
 
-      tick();
+      tick()
     }
 
-    return null;
+    return null
   }
 
   /**
    * @description - Stops the periodic thing
    */
   function stop() {
-    running = false;
+    running = false
   }
 
-  return { start, stop };
-};
+  return { start, stop }
+}
